@@ -1,60 +1,155 @@
 ﻿using System;
 using System.Data;
-using System.Data.OleDb;
 using System.IO;
-using System.Timers;
 using DataMonitorService.Interfaces;
 using DataMonitorService.Models;
 using DataMonitorService.Models.Exceptions;
 using DataMonitorService.Utilities;
-using System.IO;
-using UpdateStatus = DataMonitorService.Models.UpdateStatus;
+using System.Security.Permissions;
+using CsvHelper;
 
 namespace DataMonitorService.DataMonitor
 {
     internal class CsvFileMonitor: IDataMonitor
     {
-        private string _csvFilePath; 
-        private DateTime _lastUpdated;
-        private UpdateStatus _status;
-        private readonly string _csvConString = "Provider=Microsoft.Jet.OleDb.4.0;Data Source={0};Extended Properties='TEXT;HDR=YES;FMT=Delimited'";
+        /// <summary>
+        /// The configuration
+        /// </summary>
+        private DataMonitorConfiguration _config;
+        
+        /// <summary>
+        /// The watcher for the input file
+        /// </summary>
+        private FileSystemWatcher _watcher;
 
+        /// <summary>
+        /// The status lock. Required for thread safety when updating the isUpdateRequired variable.
+        /// </summary>
+        private readonly object _statusLock = new object();
+
+        /// <summary>
+        /// The isUpdateRequired variable that tells if the input data should be refreshed
+        /// </summary>
+        private bool _isUpdateRequired = true;
+
+        /// <summary>
+        /// The retry count when the read/update operation fails.
+        /// </summary>
+        private int retryCount = 0;
+        
         /// <summary>
         /// Configures the data monitor and also validates the configuration
         /// </summary>
-        /// <param name="fmc"></param>
-        public void Configure(DataMonitorConfiguration fmc)
+        /// <param name="dataMonitorConfiguration"></param>
+        public void Configure(DataMonitorConfiguration dataMonitorConfiguration)
         {
-            ValidateConfiguration(fmc);
+            Logger.LogOperations("Received Configuration. Validating...");
 
-            _csvFilePath = fmc.Source;
+            ValidateConfiguration(dataMonitorConfiguration);
+            _config = dataMonitorConfiguration;
+
+            Logger.LogOperations("Validated Configuration.");
         }
 
         /// <summary>
-        /// Checks if update is required. If it is, it sends data to the service host.
+        /// Starts monitoring the file for changes and updates the specified service host if necessary.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void CheckAndUpate(object sender, ElapsedEventArgs e)
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        public void StartMonitor()
         {
-            DateTime fileLastModified;
-            if (IsDataUpdateRequired(out fileLastModified))
+            ConfigureWatch();
+            while (true)
             {
-                _status = UpdateStatus.Updating;
+                if (_isUpdateRequired)
+                {
+                    Logger.LogOperations("START Update:");
 
-                ReadDataAndUpdateServiceHost();
+                    var success = ReadDataAndUpdateServiceHost();
+                    if (success)
+                    {
+                        UpdateStatusVariable(false);
+                    }
+                    else if (retryCount >= _config.MaxRetryCount)
+                    {
+                        UpdateStatusVariable(false);
+                        Logger.LogWarning(string.Format("Update task re-attempted {0} times (MAX). Skipping and waiting for next update.", retryCount));
+                    }
 
-                _status = UpdateStatus.Finished;
-                _lastUpdated = fileLastModified;
+                    Logger.LogOperations("END Update!");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Stops the monitor.
+        /// </summary>
+        public void StopMonitor()
+        {
+            _watcher.Changed -= FileModifiedHandler;
+        }
+
+        /// <summary>
+        /// Configures the watch for the csv file.
+        /// </summary>
+        private void ConfigureWatch()
+        {
+            Logger.LogOperations("Configuring Watch....");
+
+            // Create a new FileSystemWatcher to watch our csv file for updates
+            _watcher = new FileSystemWatcher
+            {
+                Path = Path.GetDirectoryName(_config.Source),
+                NotifyFilter = NotifyFilters.LastWrite,
+                Filter = Path.GetFileName(_config.Source)
+            };
+            
+            _watcher.Changed += FileModifiedHandler;
+            _watcher.EnableRaisingEvents = true;
+
+            Logger.LogOperations("Watch configured for file " + _config.Source);
+        }
+
+        /// <summary>
+        /// File modified handler.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        public void FileModifiedHandler(object sender, EventArgs e)
+        {
+            Logger.LogOperations("File modification detected.");
+            UpdateStatusVariable(true);
+        }
+
+        /// <summary>
+        /// Updates the status variable which indicates if the file should be read again or not
+        /// </summary>
+        /// <param name="updateRequred">if set to <c>true</c> [update requred].</param>
+        private void UpdateStatusVariable(bool updateRequred)
+        {
+            lock (_statusLock)
+            {
+                _isUpdateRequired = false || updateRequred;
+                Logger.LogOperations("Setting isUpdateRequired to " + _isUpdateRequired);
             }
         }
 
         /// <summary>
         /// Gets the latest data and updates service host
         /// </summary>
-        private void ReadDataAndUpdateServiceHost()
+        private bool ReadDataAndUpdateServiceHost()
         {
-            var dataTable = ReadFromCsv();
+            try
+            {
+                var dataTable = ReadFromCsv();
+                retryCount = 0;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning(string.Format("Error when attempting to Read and Update! Will attampt again! Error: {0}\nDetails{1}", ex.Message, ex.StackTrace));
+                retryCount++;
+            }
+            return false;
         }
 
         /// <summary>
@@ -63,38 +158,25 @@ namespace DataMonitorService.DataMonitor
         /// <returns></returns>
         private DataTable ReadFromCsv()
         {
-            var conStr = string.Format(_csvConString, Path.GetDirectoryName(_csvFilePath));
-            DataTable dataTable;
+            Logger.LogOperations("START Reading from source.");
 
-            //Read Data from the First Sheet.
-            using (var con = new OleDbConnection(conStr))
+            var dataTable = new DataTable();
+            using (var fileStream = new FileStream(_config.Source, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var textReader = new StreamReader(fileStream))
             {
-                using (var cmd = new OleDbCommand())
+                var csv = new CsvReader(textReader);
+                while (csv.Read())
                 {
-                    using (var oda = new OleDbDataAdapter())
+                    var row = dataTable.NewRow();
+                    foreach (DataColumn column in dataTable.Columns)
                     {
-                        dataTable = new DataTable();
-                        cmd.CommandText = "SELECT * From [" + Path.GetFileName(_csvFilePath) + "]";
-                        cmd.Connection = con;
-                        con.Open();
-                        oda.SelectCommand = cmd;
-                        oda.Fill(dataTable);
-                        con.Close();
+                        row[column.ColumnName] = csv.GetField(column.DataType, column.ColumnName);
                     }
+                    dataTable.Rows.Add(row);
                 }
             }
+            Logger.LogOperations("FINISHED Reading into DataTable!");
             return dataTable;
-        }
-
-        /// <summary>
-        /// Checks if data update is required.
-        /// </summary>
-        /// <param name="fileLastModified"></param>
-        /// <returns></returns>
-        private bool IsDataUpdateRequired(out DateTime fileLastModified)
-        {
-            fileLastModified = File.GetLastWriteTime(_csvFilePath);
-            return (_status != UpdateStatus.Updating) && (fileLastModified > _lastUpdated);
         }
 
         /// <summary>
@@ -106,13 +188,13 @@ namespace DataMonitorService.DataMonitor
             if (fmc == null)
             {
                 Logger.LogError("Configuration was null");
-                throw new DataMonitorConfigurationException("Configuration was null");
+                throw new DataMonitorConfigurationException("Configuration was null", null);
             }
 
             if (!File.Exists(fmc.Source))
             {
                 Logger.LogError("The input file to monitor was invalid or not found: " + fmc.Source);
-                throw new DataMonitorConfigurationException("The input file to monitor was invalid or not found: " + fmc.Source);
+                throw new DataMonitorConfigurationException("The input file to monitor was invalid or not found: " + fmc.Source, null);
             }
         }
     }

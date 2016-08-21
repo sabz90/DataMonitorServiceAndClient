@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace DataMonitorService.Utilities
 {
@@ -13,34 +10,57 @@ namespace DataMonitorService.Utilities
         private static readonly string OperationsFilePath = Utility.GetAppSettingsFor("operationsLogFilePath");
         private static readonly string WarningFilePath = Utility.GetAppSettingsFor("warningLogFilePath");
 
+        //Locks are needed here for thread safety.
+        private static readonly object ErrLock = new object();
+        private static readonly object OpLock = new object();
+        private static readonly object WrnLock = new object();
+
+        /// <summary>
+        /// Logs the error.
+        /// </summary>
+        /// <param name="errorMsg">The error MSG.</param>
         public static void LogError(string errorMsg)
         {
-            var sb = new StringBuilder();
-            sb.Append(DateTime.Now);
-            sb.Append(": " + errorMsg);
-            sb.AppendLine();
-            
-            File.AppendAllText(ErrorFilePath, sb.ToString());
+            lock (ErrLock)
+            {
+                var sb = new StringBuilder();
+                sb.Append(DateTime.Now);
+                sb.Append(": " + errorMsg);
+                sb.AppendLine();
+                File.AppendAllText(ErrorFilePath, sb.ToString());
+            }
         }
 
+        /// <summary>
+        /// Logs the operations.
+        /// </summary>
+        /// <param name="msg">The MSG.</param>
         public static void LogOperations(string msg)
         {
-            var sb = new StringBuilder();
-            sb.Append(DateTime.Now);
-            sb.Append(": " + msg);
-            sb.AppendLine();
-
-            File.AppendAllText(OperationsFilePath, sb.ToString());
+            lock (OpLock)
+            {
+                var sb = new StringBuilder();
+                sb.Append(DateTime.Now);
+                sb.Append(": " + msg);
+                sb.AppendLine();
+                File.AppendAllText(OperationsFilePath, sb.ToString());
+            }
         }
 
+        /// <summary>
+        /// Logs the warning.
+        /// </summary>
+        /// <param name="wrnMsg">The WRN MSG.</param>
         public static void LogWarning(string wrnMsg)
         {
-            var sb = new StringBuilder();
-            sb.Append(DateTime.Now);
-            sb.Append(": " + wrnMsg);
-            sb.AppendLine();
-
-            File.AppendAllText(WarningFilePath, sb.ToString());
+            lock (WrnLock)
+            {
+                var sb = new StringBuilder();
+                sb.Append(DateTime.Now);
+                sb.Append(": " + wrnMsg);
+                sb.AppendLine();
+                File.AppendAllText(WarningFilePath, sb.ToString());
+            }
         }
     }
 }

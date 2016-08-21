@@ -1,0 +1,32 @@
+8/21/2016 7:03:07 PM: Received Configuration. Validating...
+8/21/2016 7:03:07 PM: Validated Configuration.
+8/21/2016 7:03:07 PM: Configuring Watch....
+8/21/2016 7:03:07 PM: Watch configured for file N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\SampleData.csv
+8/21/2016 7:03:07 PM: START Update:
+8/21/2016 7:03:07 PM: START Reading from source N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\SampleData.csv
+8/21/2016 7:03:08 PM: FINISHED Reading from source N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\SampleData.csv
+8/21/2016 7:03:08 PM: Setting isUpdateRequired to False
+8/21/2016 7:03:08 PM: END Update!
+8/21/2016 7:03:20 PM: File modification detected.
+8/21/2016 7:03:20 PM: START Update:
+8/21/2016 7:03:20 PM: Setting isUpdateRequired to True
+8/21/2016 7:03:20 PM: START Reading from source N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\SampleData.csv
+8/21/2016 7:03:20 PM: FINISHED Reading from source N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\SampleData.csv
+8/21/2016 7:03:20 PM: Setting isUpdateRequired to False
+8/21/2016 7:03:20 PM: END Update!
+8/21/2016 7:03:29 PM: File modification detected.
+8/21/2016 7:03:29 PM: Setting isUpdateRequired to True
+8/21/2016 7:03:29 PM: START Update:
+8/21/2016 7:03:29 PM: START Reading from source N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\SampleData.csv
+8/21/2016 7:03:30 PM: FINISHED Reading from source N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\SampleData.csv
+8/21/2016 7:03:30 PM: Setting isUpdateRequired to False
+8/21/2016 7:03:30 PM: END Update!
+8/21/2016 7:04:49 PM: File modification detected.
+8/21/2016 7:04:49 PM: START Update:
+8/21/2016 7:04:49 PM: START Reading from source N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\SampleData.csv
+8/21/2016 7:04:49 PM: Setting isUpdateRequired to True
+8/21/2016 7:04:49 PM: File modification detected.
+8/21/2016 7:04:49 PM: Setting isUpdateRequired to True
+8/21/2016 7:04:49 PM: FINISHED Reading from source N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\SampleData.csv
+8/21/2016 7:04:49 PM: Setting isUpdateRequired to False
+8/21/2016 7:04:49 PM: END Update!
