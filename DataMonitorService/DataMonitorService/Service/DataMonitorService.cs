@@ -1,52 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using DataMonitorService.DataMonitor;
+using DataMonitorService.Interfaces;
 using DataMonitorService.Utilities;
 
 namespace DataMonitorService.Service
 {
     class DataMonitorService
     {
-        private Timer _timer;
+        /// <summary>
+        /// The data monitor
+        /// </summary>
+        private readonly IDataMonitor _dataMonitor;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataMonitorService"/> class depending on app settings
+        /// </summary>
         public DataMonitorService()
         {
-            SetupService();
+            try
+            {
+                _dataMonitor = DataMonitorFactory.GetDataMonitor();
+                Logger.LogOperations("Initialized DataMonitor Successfully");
+
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(string.Format("Fatal Error occured when attempting to initialize data monitor service. \nMessage: {0}\nDetails:{1}", ex.Message, ex.StackTrace));
+            }
         }
 
+        /// <summary>
+        /// Starts this Data Monitor.
+        /// </summary>
         public void Start()
         {
-            _timer.Start();
+            try
+            {
+                Logger.LogOperations("#### DATA MONITOR STARTING ####");
+                _dataMonitor.StartMonitor();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(string.Format("Fatal Error occured when attempting to start data monitor service. \nMessage: {0}\nDetails:{1}", ex.Message, ex.StackTrace));
+            }
         }
 
+        /// <summary>
+        /// Stops the Data Monitor.
+        /// </summary>
         public void Stop()
         {
-            _timer.Stop();
-        }
-            
-        private void SetupService()
-        {
-            //setup the timer with configured values
-            SetupTimer();
-
-            //Get the file monitor depending on configuration
-            var dataMonitor = DataMonitorFactory.GetDataMonitor();
-
-            //Check for updates to the file every interval
-            _timer.Elapsed += new ElapsedEventHandler(dataMonitor.CheckAndUpate);
-        }
-
-        private void SetupTimer()
-        {
-            _timer = new Timer(double.Parse(Utility.GetAppSettingsFor("TimerIntervalMilliseconds")))
+            try
             {
-                AutoReset = true
-            };
+                Logger.LogOperations("#### DATA MONITOR STOPPING ####");
+                _dataMonitor.StopMonitor();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(string.Format("Fatal Error occured when attempting to STOP data monitor service. \nMessage: {0}\nDetails:{1}", ex.Message, ex.StackTrace));
+            }
         }
-       
     }
 }
