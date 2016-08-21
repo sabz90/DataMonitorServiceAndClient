@@ -1,0 +1,225 @@
+8/21/2016 11:47:38 PM: Error when attempting to Read and Update! Will attampt again! Error: The server was unable to process the request due to an internal error.  For more information about the error, either turn on IncludeExceptionDetailInFaults (either from ServiceBehaviorAttribute or from the <serviceDebug> configuration behavior) on the server in order to send the exception information back to the client, or turn on tracing as per the Microsoft .NET Framework SDK documentation and inspect the server trace logs.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   at System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataTable name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataTable name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 147
+8/21/2016 11:47:39 PM: Error when attempting to Read and Update! Will attampt again! Error: The server was unable to process the request due to an internal error.  For more information about the error, either turn on IncludeExceptionDetailInFaults (either from ServiceBehaviorAttribute or from the <serviceDebug> configuration behavior) on the server in order to send the exception information back to the client, or turn on tracing as per the Microsoft .NET Framework SDK documentation and inspect the server trace logs.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   at System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataTable name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataTable name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 147
+8/21/2016 11:47:39 PM: Update task re-attempted 3 times (MAX). Skipping and waiting for next update.
+8/22/2016 12:38:41 AM: Error when attempting to Read and Update! Will attampt again! Error: There was no endpoint listening at http://localhost:8080/dataUpdate/DataUpdateService that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:38:43 AM: Error when attempting to Read and Update! Will attampt again! Error: There was no endpoint listening at http://localhost:8080/dataUpdate/DataUpdateService that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:38:45 AM: Error when attempting to Read and Update! Will attampt again! Error: There was no endpoint listening at http://localhost:8080/dataUpdate/DataUpdateService that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:38:45 AM: Update task re-attempted 3 times (MAX). Skipping and waiting for next update.
+8/22/2016 12:41:14 AM: Error when attempting to Read and Update! Will attampt again! Error: There was no endpoint listening at http://localhost:8080/dataUpdate/DataUpdateService that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:41:14 AM: Update task re-attempted 4 times (MAX). Skipping and waiting for next update.
+8/22/2016 12:41:52 AM: Error when attempting to Read and Update! Will attampt again! Error: There was no endpoint listening at http://localhost:8080/dataUpdate/DataUpdateService that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:41:52 AM: Update task re-attempted 5 times (MAX). Skipping and waiting for next update.
+8/22/2016 12:42:12 AM: Error when attempting to Read and Update! Will attampt again! Error: There was no endpoint listening at http://localhost:8080/dataUpdate/DataUpdateService that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:42:14 AM: Error when attempting to Read and Update! Will attampt again! Error: There was no endpoint listening at http://localhost:8080/dataUpdate/DataUpdateService that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:42:16 AM: Error when attempting to Read and Update! Will attampt again! Error: There was no endpoint listening at http://localhost:8080/dataUpdate/DataUpdateService that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:42:16 AM: Update task re-attempted 3 times (MAX). Skipping and waiting for next update.
+8/22/2016 12:48:26 AM: Error when attempting to Read and Update! Will attampt again! Error: The request channel timed out while waiting for a reply after 00:00:59.9959981. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:49:26 AM: Error when attempting to Read and Update! Will attampt again! Error: The request channel timed out while waiting for a reply after 00:01:00. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:50:26 AM: Error when attempting to Read and Update! Will attampt again! Error: The request channel timed out while waiting for a reply after 00:00:59.9989992. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout.
+Details
+Server stack trace: 
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at DataMonitorService.DataUpdateProxy.IDataUpdateService.UpdateData(DataSet name)
+   at DataMonitorService.DataUpdateProxy.DataUpdateServiceClient.UpdateData(DataSet name) in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\Service References\DataUpdateProxy\Reference.cs:line 59
+   at DataMonitorService.DataMonitor.CsvFileMonitor.ReadDataAndUpdateServiceHost() in N:\Dev\Git\DataMonitorServiceAndClient\DataMonitorService\DataMonitorService\DataMonitor\CsvFileMonitor.cs:line 146
+8/22/2016 12:50:26 AM: Update task re-attempted 3 times (MAX). Skipping and waiting for next update.
