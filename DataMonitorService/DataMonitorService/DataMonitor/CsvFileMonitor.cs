@@ -140,7 +140,11 @@ namespace DataMonitorService.DataMonitor
         {
             try
             {
-                var dataTable = ReadFromCsv();
+                var dataSet = ReadFromCsv();
+                
+                var dataUpdateClient = new DataUpdateProxy.DataUpdateServiceClient();
+                dataUpdateClient.UpdateData(dataSet);
+
                 retryCount = 0;
                 return true;
             }
@@ -156,11 +160,13 @@ namespace DataMonitorService.DataMonitor
         /// Reads from CSV and returns the DataTable
         /// </summary>
         /// <returns></returns>
-        private DataTable ReadFromCsv()
+        private DataSet ReadFromCsv()
         {
             Logger.LogOperations("START Reading from source.");
 
             var dataTable = new DataTable();
+            dataTable.TableName = "CsvData";
+
             using (var fileStream = new FileStream(_config.Source, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var textReader = new StreamReader(fileStream))
             {
@@ -175,8 +181,14 @@ namespace DataMonitorService.DataMonitor
                     dataTable.Rows.Add(row);
                 }
             }
-            Logger.LogOperations("FINISHED Reading into DataTable!");
-            return dataTable;
+
+            //Using DataSet instead of DataTable as DataTable has issues with deserialization.
+            //refer http://stackoverflow.com/questions/1935522/datatable-does-not-support-schema-inference-from-xml
+            var dataSet = new DataSet();
+            dataSet.Tables.Add(dataTable);
+
+            Logger.LogOperations("FINISHED Reading into DataSet!");
+            return dataSet;
         }
 
         /// <summary>
