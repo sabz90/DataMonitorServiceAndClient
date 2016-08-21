@@ -1,12 +1,26 @@
-﻿using System.Timers;
+﻿using System;
+using System.Timers;
 using DataMonitorService.Models;
 
 namespace DataMonitorService.Interfaces
 {
     internal interface IDataMonitor
     {
-       void Configure(DataMonitorConfiguration fmc);
+        /// <summary>
+        /// Configures the DataMonitor with specified DataMonitorConfiguration.
+        /// </summary>
+        /// <param name="dataMonitorConfiguration">The congifuration object.</param>
+        void Configure(DataMonitorConfiguration dataMonitorConfiguration);
 
-       void CheckAndUpate(object sender, ElapsedEventArgs e);
+        /// <summary>
+        /// Starts the monitoring.
+        /// </summary>
+        void StartMonitor();
+
+        /// <summary>
+        /// Stops the monitoring.
+        /// </summary>
+        void StopMonitor();
+        
     }
 }

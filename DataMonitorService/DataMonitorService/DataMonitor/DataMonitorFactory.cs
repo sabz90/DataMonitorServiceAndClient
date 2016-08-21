@@ -8,13 +8,19 @@ namespace DataMonitorService.DataMonitor
 {
     internal static class DataMonitorFactory
     {
+        /// <summary>
+        /// Gets the data monitor depending on configuration.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="DataMonitorConfigurationException">null</exception>
         internal static IDataMonitor GetDataMonitor()
         {
             //Create configuration & verify
             var fmc = new DataMonitorConfiguration()
             {
                 Source = Utility.GetAppSettingsFor("SourcePath"),
-                Type = (SourceType)Enum.Parse(typeof(SourceType), Utility.GetAppSettingsFor("SourceType"))
+                Type = (SourceType)Enum.Parse(typeof(SourceType), Utility.GetAppSettingsFor("SourceType")),
+                MaxRetryCount = int.Parse(Utility.GetAppSettingsFor("MaxRetryCount"))
             };
          
             //Check type of file   
@@ -31,7 +37,7 @@ namespace DataMonitorService.DataMonitor
                 default:
                     var errMsg = string.Format("Input source of type '{0}' not supported yet!", fmc.Type);
                     Logger.LogError(errMsg);
-                    throw new DataMonitorConfigurationException(errMsg);
+                    throw new DataMonitorConfigurationException(errMsg, null);
             }
         }
     }

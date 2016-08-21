@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using DataMonitorService.Models.Exceptions;
-using DataMonitorService.Utilities;
-
-namespace DataMonitorService.Models
+﻿namespace DataMonitorService.Models
 {
     internal class DataMonitorConfiguration
     {
+        /// <summary>
+        /// Gets or sets the data source.
+        /// </summary>
         public string Source { get; set; }
 
+        /// <summary>
+        /// Gets or sets the source type.
+        /// </summary>
         public SourceType Type { get; set; }
 
-        public DataMonitorConfiguration()
-        {
-
-        }
+        /// <summary>
+        /// Gets or sets the maximum retry count if error occurs when reading or updating.
+        /// </summary>
+        public int MaxRetryCount { get; set; }
     }
 }
