@@ -1,0 +1,5 @@
+Requirement:
+1.       Component A is a Windows Service which monitors a csv file, stored locally.
+2.       Component B is a Windows Application, which has a DataGridView that on start-up reads and displays the contents of the csv file.
+3.       The csv file is modified via a process (not in scope), or manually, and saved with contents changed.
+4.       Immediately Component A identifies the change and updates the grid in Component B, using a WCF call.
