@@ -7,8 +7,8 @@
     <ProjectGuid>{26F6350B-9966-4732-A844-8D5B18E79E7A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataUpdateService</RootNamespace>
-    <AssemblyName>DataUpdateService</AssemblyName>
+    <RootNamespace>DataUpdateServiceModel</RootNamespace>
+    <AssemblyName>DataUpdateServiceModel</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

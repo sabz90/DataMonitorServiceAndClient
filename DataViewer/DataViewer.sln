@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataViewer", "DataViewer\DataViewer.csproj", "{EFD4D6AC-2785-47EE-9CC3-9B6D971F7BD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataUpdateService", "DataUpdateService\DataUpdateService.csproj", "{26F6350B-9966-4732-A844-8D5B18E79E7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataUpdateServiceModel", "DataUpdateService\DataUpdateServiceModel.csproj", "{26F6350B-9966-4732-A844-8D5B18E79E7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,13 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DataUpdateService.EventModel
+namespace DataUpdateServiceModel.EventModel
 {
+    /// <summary>
+    /// Data Update Event Handler
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="e">The <see cref="DataUpdateEventArgs"/> instance containing the event data.</param>
     public delegate void DataUpdateEventHandler(object source, DataUpdateEventArgs e);
+
+    /// <summary>
+    /// Data Update Event args. Holds the dataset
+    /// </summary>
+    /// <seealso cref="System.EventArgs" />
     public class DataUpdateEventArgs : EventArgs
     {
         public DataSet DataSet { get; private set; }
