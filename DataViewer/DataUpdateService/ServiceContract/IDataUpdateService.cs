@@ -1,7 +1,7 @@
 using System.Data;
 using System.ServiceModel;
 
-namespace DataUpdateService
+namespace DataUpdateServiceModel.ServiceContract
 {
     [ServiceContract]
     public interface IDataUpdateService
