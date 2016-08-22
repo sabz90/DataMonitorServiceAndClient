@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
+using System.Linq;
 using DataMonitorService.Interfaces;
 using DataMonitorService.Models;
 using DataMonitorService.Models.Exceptions;
@@ -164,21 +166,23 @@ namespace DataMonitorService.DataMonitor
         {
             Logger.LogOperations("START Reading from source.");
 
-            var dataTable = new DataTable();
-            dataTable.TableName = "CsvData";
+            var dataTable = new DataTable {TableName = "CsvData"};
 
             using (var fileStream = new FileStream(_config.Source, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var textReader = new StreamReader(fileStream))
             {
                 var csv = new CsvReader(textReader);
+                csv.ReadHeader();
+
+                var headers = csv.FieldHeaders;
+                foreach (var header in headers)
+                {
+                    dataTable.Columns.Add(header);
+                }
+
                 while (csv.Read())
                 {
-                    var row = dataTable.NewRow();
-                    foreach (DataColumn column in dataTable.Columns)
-                    {
-                        row[column.ColumnName] = csv.GetField(column.DataType, column.ColumnName);
-                    }
-                    dataTable.Rows.Add(row);
+                    dataTable.Rows.Add(csv.CurrentRecord.Take(dataTable.Columns.Count).ToArray());
                 }
             }
 
